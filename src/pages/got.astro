@@ -1,0 +1,25 @@
+---
+// Front matter: Son los metadatos que se pueden agregar a un archivo Markdown o MDX. En este caso, se está utilizando para definir el título de la página.
+// Aquí va el JS/TS
+import Comunicaciones from '../components/comunicaciones.astro'
+import Character from '../components/character.astro'
+import Layout from '../layouts/layoutGoT.astro'
+import DATA from '../data/data.json'
+import type{ Char } from '../types/types';
+console.log(DATA);
+---
+
+<Layout>
+    <div class="app container">
+        <ul class="characters-list row list-unstyled">
+
+            {
+                DATA.map((item) => <Character character={item as Char}/>)
+            }
+
+        </ul>
+    </div>
+    <Comunicaciones />
+</Layout>
+
+<style></style>
