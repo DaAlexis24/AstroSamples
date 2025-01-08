@@ -1,25 +1,56 @@
 ---
 // Front matter: Son los metadatos que se pueden agregar a un archivo Markdown o MDX. En este caso, se está utilizando para definir el título de la página.
 // Aquí va el JS/TS
-import Comunicaciones from '../components/comunicaciones.astro'
-import Character from '../components/character.astro'
-import Layout from '../layouts/layoutGoT.astro'
-import DATA from '../data/data.json'
-import type{ Char } from '../types/types';
+import Layout from '../layouts/layoutGoT.astro';
+import Comunicaciones from '../components/got/comunicaciones.astro';
+import type { Char } from '../types/types';
+import Character from '../components/got/character.astro';
+import DATA from '../data/data.json';
+
 console.log(DATA);
 ---
 
 <Layout>
-    <div class="app container">
-        <ul class="characters-list row list-unstyled">
-
-            {
-                DATA.map((item) => <Character character={item as Char}/>)
-            }
-
+    <div>
+        <ul>
+            {DATA.map((item) => <Character character={item as Char} />)}
         </ul>
     </div>
     <Comunicaciones />
 </Layout>
 
-<style></style>
+<style>
+    div {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        align-items: center;
+        /* width: 100%; */
+        margin-inline: 1rem;
+        margin-block: 1rem;
+    }
+
+    /* @media (width > 576px) {
+        .container {
+            max-width: 540px;
+        }
+    }
+
+    @media (width > 768px) {
+        .container {
+            max-width: 720px;
+        }
+    }
+
+    @media (width > 992px) {
+        .container {
+            max-width: 960px;
+        }
+    } */
+
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 2rem;
+    }
+</style>

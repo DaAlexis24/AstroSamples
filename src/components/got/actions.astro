@@ -1,0 +1,66 @@
+---
+import Button from "./button.astro";
+import type{ Char } from '../../types/types';
+
+type Props = {
+    character: Char;
+}
+
+const {character} = Astro.props;
+---
+
+<div>
+    <Button character={character}>Habla</Button>
+    <Button character={character}>Muere</Button>
+</div>
+
+<style>
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 90px;
+    }
+</style>
+
+<script>
+    import type{ Char } from '../../types/types';
+
+    const die = (character: Char)  => {
+        const cardElement = document.querySelector(`[data-id=${character.name}]`) as HTMLDivElement;
+        console.log(cardElement);
+        cardElement.querySelector('.alive')?.setAttribute('hidden', 'true');
+        cardElement.querySelector('.die')?.removeAttribute('hidden');
+        const imgElement = cardElement.querySelector('img') as HTMLImageElement;
+        imgElement.classList.add('dead');
+    }
+
+    const talk = (character: Char)  => {
+        
+        setTimeout(() => {
+            divElement.classList.remove('on');
+        }, 3000);
+
+        const divElement = document.querySelector('.communications') as HTMLDivElement
+        divElement.classList.add('on');
+        const firstChild = divElement.firstElementChild;
+        if(!firstChild) return;
+        firstChild.textContent = character.message; 
+    }
+
+    const handleClick = (event: Event) => {
+        const target = event.target as HTMLButtonElement;
+        const data = target.dataset.character as string;
+        const character: Char = JSON.parse(data);
+        
+        if (target.textContent?.trim() === 'Habla') {
+            console.log(target.textContent);
+            talk(character);
+        } else {
+            die(character);
+        }
+    }
+    const buttons = document.querySelectorAll('.action');
+    buttons.forEach(button => button.addEventListener('click', handleClick));
+</script>
