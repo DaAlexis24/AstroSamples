@@ -12,7 +12,7 @@ const {character} = Astro.props;
 </button>
 
 <style>
-    button {
+        button {
         background-color: #67331e;
         color: #fff;
         width: 80%;
@@ -29,7 +29,14 @@ const {character} = Astro.props;
         &:not(:disabled) {
             cursor: pointer;
         }
-        &:hover {
+
+        &:disabled {
+            color: #b0b0b0;
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        &:not(:disabled):hover {
             color: #212529;
         }
     }
